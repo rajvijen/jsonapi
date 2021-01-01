@@ -45,10 +45,9 @@ exports.writeDB = async (fullData)=> {
 }
 
 exports.initEmptyDBIfNotExist = async () => {
-    try {
-        fs.existsSync(config.json_path)
-    }
-    catch (err){
+    
+    if(!fs.existsSync(config.json_path)){
+   
         console.log("DB does not exist. Creating new DB at " + config.json_path)
         await this.writeDB({})
     }
@@ -83,12 +82,18 @@ exports.newObject = async(category, obj) => {
         throw "Only Integer IDs allowed"
     }
 
+    if(_.find(categoryData, o => o.id === obj.id)) {
+        throw "An object of this ID already exists"
+    }
+
     categoryData.push(obj)
     categoryData = _.sortBy(categoryData, 'id')
 
     allData[category] = categoryData
 
     this.writeDB(allData)
+
+    return obj
 }
 
 exports.getFullCategory = async(category) => {
@@ -102,25 +107,35 @@ exports.getFullCategory = async(category) => {
 }
 
 exports.getObject = async (category, id) => {
+
     const allData = await this.readDB()
     if (allData[category] === undefined){
         // category does not exist. Create new
+        
         return null
     }
 
-    const reqObj = _.find(allData[category], o => o.id === id)
+    const reqObj = _.find(allData[category], o => o.id == id)
 
     return reqObj
 }
 
 exports.deleteObject = async (category, id) => {
     let allData = await this.readDB()
+    console.log(allData)
     if (allData[category] === undefined){
         // category does not exist. Create new
+        return null
+    }
+
+    const reqObj = _.find(allData[category], o => o.id == id)
+
+    if (reqObj === null) {
         return null
     }
 
     allData[category] = _.filter(allData[category], o => o.id != id)
 
     this.writeDB(allData)
+    return reqObj
 }
