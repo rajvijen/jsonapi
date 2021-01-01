@@ -8,6 +8,7 @@ const writeFilePromise = promisify(fs.writeFile)
 
 const _ = require('underscore')
 
+
 exports.readDB = async () => {
     const fileRaw = await readFilePromise(config.json_path)
     const file_json = JSON.parse(fileRaw)
@@ -55,6 +56,9 @@ exports.initEmptyDBIfNotExist = async () => {
 
 
 exports.newObject = async(category, obj) => {
+
+    const release_mutex = await config.json_mutex.acquire()
+
     const allData = await this.readDB()
 
     if (allData[category] === undefined){
@@ -93,6 +97,7 @@ exports.newObject = async(category, obj) => {
 
     this.writeDB(allData)
 
+    release_mutex()
     return obj
 }
 
@@ -127,6 +132,7 @@ exports.getObject = async (category, id) => {
 }
 
 exports.deleteObject = async (category, id) => {
+    const release_mutex = await config.json_mutex.acquire()
     let allData = await this.readDB()
     console.log(allData)
     if (allData[category] === undefined){
@@ -143,10 +149,13 @@ exports.deleteObject = async (category, id) => {
     allData[category] = _.filter(allData[category], o => o.id != id)
 
     this.writeDB(allData)
+
+    release_mutex()
     return reqObj
 }
 
 exports.updateObject = async (category, id, obj) => {
+    const release_mutex = await config.json_mutex.acquire()
     const allData = await this.readDB()
 
     if (obj.id === undefined){
@@ -176,6 +185,7 @@ exports.updateObject = async (category, id, obj) => {
 
     this.writeDB(allData)
 
+    release_mutex()
     return obj
 
 }
