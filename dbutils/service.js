@@ -139,3 +139,37 @@ exports.deleteObject = async (category, id) => {
     this.writeDB(allData)
     return reqObj
 }
+
+exports.updateObject = async (category, id, obj) => {
+    const allData = await this.readDB()
+
+    if (obj.id === undefined){
+        obj.id = parseInt(id)
+    }
+    
+    if (obj.id != id){
+        throw "Updating ID of object is not allowed"
+    }
+
+    if (allData[category] === undefined){
+        // category does not exist. Create new
+        
+        throw "This object does not exist"
+    }
+
+    
+    const existingObj = _.find(allData[category], o => o.id == id)
+
+    if (existingObj === null){
+        throw "This object does not exist"
+    }
+
+    const objIndex = _.indexOf(allData[category], existingObj)
+
+    allData[category][objIndex] = obj
+
+    this.writeDB(allData)
+
+    return obj
+
+}

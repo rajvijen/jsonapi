@@ -56,3 +56,21 @@ exports.createObject = async (req, res) => {
     }
 
 }
+
+exports.updateObject = async (req, res) => {
+    const path = req.params.path
+    const id = req.params.id
+    const obj = req.body
+
+    if (Object.keys(obj).length === 0) {
+        return res.status(400).send({"error":"Empty Input Object"})
+    }
+
+    try {
+        const updatedObject = await dbService.updateObject(path, id, obj)
+        return res.status(201).send({"status":"Object Created", object: updatedObject})
+    } catch( err ) {
+        console.log(err)
+        return res.status(400).send({"error": err.toString()})
+    }
+}
