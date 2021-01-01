@@ -1,10 +1,12 @@
 const dbService = require('./service')
 
 exports.getFulldata = async (req, res) => {
+    // also supports filtering by query parameters
     const path = req.params.path
+    const qparams = req.query
+    console.log(qparams)
 
-
-    const fullPathData = await dbService.getFullCategory(path)
+    const fullPathData = await dbService.getFullCategory(path, qparams)
     if (fullPathData === null || fullPathData === undefined){
         return res.status(400).send({"error":"This path does not exist"})
     }

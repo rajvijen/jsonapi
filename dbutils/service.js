@@ -96,13 +96,19 @@ exports.newObject = async(category, obj) => {
     return obj
 }
 
-exports.getFullCategory = async(category) => {
+exports.filterByQueryParams = async (data, params) => {
+
+    return _.where(data, params)
+}
+
+exports.getFullCategory = async(category, params = {}) => {
     const allData = await this.readDB()
     let retData = {};
     if (allData[category]){
         retData = allData[category]
     }
 
+    retData = await this.filterByQueryParams(retData, params)
     return retData
 }
 
