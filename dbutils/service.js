@@ -54,22 +54,79 @@ exports.initEmptyDBIfNotExist = async () => {
     }
 }
 
+exports.getSubDocumentAtPath = async (topDocument, subpaths) => {
+    
+    let subref = topDocument
+    for (i of subpaths){
+        if (subref.constructor == Array){
+            subref = _.find(subref, o => o.id == i)
+        }
+        else{
+            subref = subref[i]
+        }
+        if (!subref) return null
 
-exports.newObject = async(category, obj) => {
+        
+    }
+
+    return subref
+}
+
+exports.updateSubDocumentAtPath = async (topDocument, subpaths, subdocument) => {
+
+    let subref = topDocument
+    let preSubRef = subref
+    let pix = 0;
+    while (pix < subpaths.length - 1){
+        
+        preSubRef = subref
+        if (subref.constructor == Array){
+            subref = _.find(subref, o => o.id == subpaths[pix])
+        }
+        else{
+            subref = subref[subpaths[pix]]
+        }
+
+        if (!subref) {
+            if (preSubRef.constructor == Array) {
+                throw "reached Array. Can not create subdocuments"
+            }
+            preSubRef[subpaths[pix]] = {}
+            subref = preSubRef[subpaths[pix]]
+        }
+        pix++;
+    }
+
+    if (subref.constructor == Array){
+        tobeUpdated = _.find(subref, o => o.id == subpaths[subpaths.length - 1])
+        uix = _.indexOf(subref, tobeUpdated)
+        subref[uix] = subdocument
+
+    }
+    else {
+        subref[subpaths[subpaths.length - 1]] = subdocument
+    }
+
+    return topDocument
+}
+
+exports.newObject = async(subpaths, obj) => {
 
     const release_mutex = await config.json_mutex.acquire()
 
     const allData = await this.readDB()
 
-    if (allData[category] === undefined){
+    existingEntries = await this.getSubDocumentAtPath(allData, subpaths)
+    console.log("Existing Entries", existingEntries)
+    if (existingEntries === undefined || existingEntries === null){
         // category does not exist. Create new
-        allData[category] = []
+        existingEntries = []
         if (obj.id === undefined) {
             obj.id = 1
         }
     }
 
-    let categoryData = allData[category]
+    // let existingEntries = allData[subpaths]
 
     // sort all objs of category
 
@@ -77,52 +134,63 @@ exports.newObject = async(category, obj) => {
 
     if (obj.id === undefined) {
         // generate new ID
-        categoryData = _.sortBy(categoryData, 'id')
-        const newID = parseInt(categoryData[categoryData.length - 1].id) + 1
+        existingEntries = _.sortBy(existingEntries, 'id')
+        const newID = parseInt(existingEntries[existingEntries.length - 1].id) + 1
         obj['id'] = newID
     }
 
     if (obj.id.constructor === String){
+        release_mutex()
         throw "Only Integer IDs allowed"
     }
 
-    if(_.find(categoryData, o => o.id === obj.id)) {
+    if(_.find(existingEntries, o => o.id === obj.id)) {
+        release_mutex()
         throw "An object of this ID already exists"
     }
 
-    categoryData.push(obj)
-    categoryData = _.sortBy(categoryData, 'id')
+    existingEntries.push(obj)
+    existingEntries = _.sortBy(existingEntries, 'id')
 
-    allData[category] = categoryData
+    // allData[category] = categoryData
 
-    this.writeDB(allData)
+    try{
+        const newAllData = await this.updateSubDocumentAtPath(allData,subpaths,existingEntries)
+        this.writeDB(newAllData)
+        release_mutex()
+    }catch(err){
+        console.log(err)
+        release_mutex()
+        throw "Invalid Path"
+    }
+    
 
     release_mutex()
     return obj
 }
 
 exports.filterByQueryParams = async (data, params) => {
-
+    if (!data || data.constructor != Array){
+        return data
+    }
     return _.where(data, params)
 }
 
-exports.getFullCategory = async(category, params = {}) => {
+exports.getFullCategory = async(subpaths, params = {}) => {
     const allData = await this.readDB()
-    let retData = {};
-    if (allData[category]){
-        retData = allData[category]
-    }
+    const subDocument = await this.getSubDocumentAtPath(allData, subpaths)
 
-    retData = await this.filterByQueryParams(retData, params)
+    retData = await this.filterByQueryParams(subDocument, params)
     return retData
 }
 
-exports.getObject = async (category, id) => {
+/*
+exports.getObject = async (subpaths, id) => {
 
     const allData = await this.readDB()
-    if (allData[category] === undefined){
+    const subDocument = await this.getSubDocumentAtPath(allData, subpaths)
+    if (subDocument === undefined){
         // category does not exist. Create new
-        
         return null
     }
 
@@ -131,59 +199,64 @@ exports.getObject = async (category, id) => {
     return reqObj
 }
 
-exports.deleteObject = async (category, id) => {
+*/
+
+exports.deleteObject = async (subpaths) => {
+    const allData = await this.readDB()
     const release_mutex = await config.json_mutex.acquire()
-    let allData = await this.readDB()
-    console.log(allData)
-    if (allData[category] === undefined){
+    const last_key = subpaths.pop()
+    let subDocument = await this.getSubDocumentAtPath(allData, subpaths)
+    
+    console.log(subDocument)
+    if (subDocument === undefined){
         // category does not exist. Create new
+        release_mutex()
         return null
     }
 
-    const reqObj = _.find(allData[category], o => o.id == id)
+    let delObj
+    if (subDocument.constructor == Array){
+        delObj = _.find(subDocument, o => o.id == last_key)
 
-    if (reqObj === null) {
-        return null
+        if (delObj === null) {
+            release_mutex()
+            return null
+        }
+
+        subDocument = _.filter(subDocument, o => o.id != last_key)
+    }
+    
+    else {
+        delObj = subDocument[last_key]
+        delete subDocument[last_key]
     }
 
-    allData[category] = _.filter(allData[category], o => o.id != id)
-
+    await this.updateSubDocumentAtPath(allData, subpaths, subDocument)
     this.writeDB(allData)
 
     release_mutex()
-    return reqObj
+    return delObj
 }
 
-exports.updateObject = async (category, id, obj) => {
+exports.updateObject = async (subpaths, obj) => {
     const release_mutex = await config.json_mutex.acquire()
     const allData = await this.readDB()
+    const olddata = await this.getSubDocumentAtPath(allData, subpaths)
+    console.log(subpaths)
+    
 
     if (obj.id === undefined){
-        obj.id = parseInt(id)
+        obj.id = olddata.id
     }
     
-    if (obj.id != id){
+    if (obj.id != olddata.id){
+        release_mutex()
         throw "Updating ID of object is not allowed"
     }
 
-    if (allData[category] === undefined){
-        // category does not exist. Create new
-        
-        throw "This object does not exist"
-    }
+    const updatedData = await this.updateSubDocumentAtPath(allData, subpaths, obj)
 
-    
-    const existingObj = _.find(allData[category], o => o.id == id)
-
-    if (existingObj === null){
-        throw "This object does not exist"
-    }
-
-    const objIndex = _.indexOf(allData[category], existingObj)
-
-    allData[category][objIndex] = obj
-
-    this.writeDB(allData)
+    this.writeDB(updatedData)
 
     release_mutex()
     return obj
