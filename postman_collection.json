@@ -6,19 +6,108 @@
 	},
 	"item": [
 		{
-			"name": "Create Object",
+			"name": "Create top Object",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\":\"Post 2\",\r\n    \"author\":\"vij2\"\r\n\r\n}",
+					"raw": "{\r\n    \"title\":\"Post 1\",\r\n    \"author\":\"vij\"\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
+				"url": {
+					"raw": "167.71.180.1:3000/posts/",
+					"host": [
+						"167",
+						"71",
+						"180",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"posts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Nested Object",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\":\"Comment 1\",\r\n    \"author\":\"adth\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "167.71.180.1:3000/posts/1/comments",
+					"host": [
+						"167",
+						"71",
+						"180",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"posts",
+						"1",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Double Nested Object",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\":\"Comment Reply 1\",\r\n    \"author\":\"brijesh\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "167.71.180.1:3000/posts/2/comments/1/comments/",
+					"host": [
+						"167",
+						"71",
+						"180",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"posts",
+						"2",
+						"comments",
+						"1",
+						"comments",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All data on Path",
+			"request": {
+				"method": "GET",
+				"header": [],
 				"url": {
 					"raw": "167.71.180.1:3000/posts/",
 					"host": [
@@ -53,28 +142,6 @@
 					"path": [
 						"posts",
 						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get All data on Path",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "167.71.180.1:3000/posts/",
-					"host": [
-						"167",
-						"71",
-						"180",
-						"1"
-					],
-					"port": "3000",
-					"path": [
-						"posts",
-						""
 					]
 				}
 			},
