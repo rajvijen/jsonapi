@@ -1,0 +1,53 @@
+{
+    "posts": [
+        {
+            "title": "Post1",
+            "author": "Rajvijen",
+            "views": 100,
+            "reviews": 30,
+            "id": 1,
+            "comments": [
+                {
+                    "text": "Comment1_updated",
+                    "author": "adth",
+                    "id": 1,
+                    "comments": [
+                        {
+                            "text": "Comment_Reply_1",
+                            "author": "brijesh",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "text": "Comment2",
+                    "author": "brijesh",
+                    "id": 2,
+                    "comments": [
+                        {
+                            "text": "Comment_Reply_2",
+                            "author": "admin",
+                            "id": 1
+                        },
+                        {
+                            "text": "Comment_Reply_1",
+                            "author": "admin1",
+                            "views": 30,
+                            "reviews": 10,
+                            "likes": 15,
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "text": "Comment3",
+                    "author": "ankur",
+                    "likes": 5,
+                    "views": 100,
+                    "reviews": 30,
+                    "id": 3
+                }
+            ]
+        }
+    ]
+}
