@@ -116,4 +116,4 @@ dist
 .pnp.*
 
 # database file 
-./db.json
+./store.json
