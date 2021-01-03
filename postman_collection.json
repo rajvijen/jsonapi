@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "ebcbc0b4-ffb4-44a3-8858-8dd36d4014dd",
-		"name": "Vijendra JSONAPI",
+		"_postman_id": "aaad15c3-caf5-464f-86a1-4c7f477b24ba",
+		"name": "JSONAPI API Documentation",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\":\"Post 1\",\r\n    \"author\":\"vij\"\r\n\r\n}",
+					"raw": "{\n    \"title\": \"Post3\",\n    \"author\": \"Vijendra\",\n    \"views\": 500,\n    \"reviews\": 100,\n    \"likes\": 51\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -20,21 +20,94 @@
 					}
 				},
 				"url": {
-					"raw": "167.71.180.1:3000/posts/",
+					"raw": "http://13.126.6.160:3000/posts/",
+					"protocol": "http",
 					"host": [
-						"167",
-						"71",
-						"180",
-						"1"
+						"13",
+						"126",
+						"6",
+						"160"
 					],
 					"port": "3000",
 					"path": [
 						"posts",
 						""
 					]
-				}
+				},
+				"description": "It creates any top level Object like `post` [`http://13.126.6.160:3000/posts/`]\n - `post` Object looks like\n```\n {\n    \"title\": \"Post1\",\n    \"author\": \"Rajvijen\",\n    \"views\": 100,\n    \"reviews\": 30,\n    \"id\": 1,\n    \"comments\": []\n}\n ```"
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Create top Object",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Post1\",\n    \"author\": \"Vijendra\",\n    \"views\": 100,\n    \"reviews\": 30,\n    \"likes\": 40\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://13.126.6.160:3000/posts/",
+							"protocol": "http",
+							"host": [
+								"13",
+								"126",
+								"6",
+								"160"
+							],
+							"port": "3000",
+							"path": [
+								"posts",
+								""
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "117"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"75-xKVtUFMvOR8mMujds929YUbWI48\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jan 2021 07:25:37 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"Object Created\",\n    \"object\": {\n        \"title\": \"Post1\",\n        \"author\": \"Vijendra\",\n        \"views\": 100,\n        \"reviews\": 30,\n        \"likes\": 40,\n        \"id\": 1\n    }\n}"
+				}
+			]
 		},
 		{
 			"name": "Create Nested Object",
@@ -43,7 +116,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"text\":\"Comment 1\",\r\n    \"author\":\"adth\"\r\n\r\n}",
+					"raw": " {\n     \"text\": \"Comment3\",\n     \"author\": \"saurabh\",\n     \"views\": 200,\n     \"reviews\": 100,\n     \"likes\": 50\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -51,22 +124,98 @@
 					}
 				},
 				"url": {
-					"raw": "167.71.180.1:3000/posts/1/comments",
+					"raw": "http://13.126.6.160:3000/posts/1/comments/",
+					"protocol": "http",
 					"host": [
-						"167",
-						"71",
-						"180",
-						"1"
+						"13",
+						"126",
+						"6",
+						"160"
 					],
 					"port": "3000",
 					"path": [
 						"posts",
 						"1",
-						"comments"
+						"comments",
+						""
 					]
-				}
+				},
+				"description": "It creates nested Object upto any deep level (infinite) like below `post` [`http://13.126.6.160:3000/posts/1/comments/`]\n\n - `post` Object looks like\n ```json\n{\n    \"title\": \"Post1\",\n    \"author\": \"Vijendra\",\n    \"views\": 100,\n    \"reviews\": 30,\n    \"likes\": 40\n    \"id\": 1,\n    \"comments\": [\n        {\n            \"text\": \"Comment1\",\n            \"author\": \"brijesh\",\n            \"views\": 120,\n\t\t\t\"reviews\": 30,\n\t\t\t\"likes\": 105,\n            \"id\": 1,\n        },\n        {\n            \"text\": \"Comment2\",\n            \"author\": \"ankur\",\n            \"views\": 100,\n            \"reviews\": 30,\n            \"likes\": 5,\n            \"id\": 2\n        },\n         {\n\t\t     \"text\": \"Comment3\",\n\t\t     \"author\": \"saurabh\",\n\t\t     \"views\": 200,\n\t\t     \"reviews\": 100,\n\t\t     \"likes\": 50\n\t\t}\n    ]\n}\n ```"
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Create Nested Object",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n     \"text\": \"Comment3\",\n     \"author\": \"saurabh\",\n     \"views\": 200,\n     \"reviews\": 100,\n     \"likes\": 50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://13.126.6.160:3000/posts/1/comments/",
+							"protocol": "http",
+							"host": [
+								"13",
+								"126",
+								"6",
+								"160"
+							],
+							"port": "3000",
+							"path": [
+								"posts",
+								"1",
+								"comments",
+								""
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "119"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"77-2GQ4T93vGElZJG3UZCed7xLeyAg\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jan 2021 07:51:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"Object Created\",\n    \"object\": {\n        \"text\": \"Comment3\",\n        \"author\": \"saurabh\",\n        \"views\": 200,\n        \"reviews\": 100,\n        \"likes\": 50,\n        \"id\": 3\n    }\n}"
+				}
+			]
 		},
 		{
 			"name": "Create Double Nested Object",
@@ -75,7 +224,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"text\":\"Comment Reply 1\",\r\n    \"author\":\"brijesh\"\r\n\r\n}",
+					"raw": "{\n    \"text\": \"Comment1_Reply_2\",\n    \"author\": \"admin1\",\n    \"views\": 50,\n    \"reviews\": 25,\n    \"likes\": 10\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -83,25 +232,102 @@
 					}
 				},
 				"url": {
-					"raw": "167.71.180.1:3000/posts/2/comments/1/comments/",
+					"raw": "http://13.126.6.160:3000/posts/1/comments/1/comments/",
+					"protocol": "http",
 					"host": [
-						"167",
-						"71",
-						"180",
-						"1"
+						"13",
+						"126",
+						"6",
+						"160"
 					],
 					"port": "3000",
 					"path": [
 						"posts",
-						"2",
+						"1",
 						"comments",
 						"1",
 						"comments",
 						""
 					]
-				}
+				},
+				"description": "It creates double nested Object upto any deep level (infinite) like below `post` [`http://13.126.6.160:3000/posts/1/comments/1/comments/`]\n\n - `post` Object looks like\n ```json\n{\n    \"title\": \"Post1\",\n    \"author\": \"Vijendra\",\n    \"views\": 100,\n    \"reviews\": 30,\n    \"id\": 1,\n    \"comments\": [\n        {\n            \"text\": \"Comment1\",\n        \t\"author\": \"brijesh\",\n        \t\"views\": 120,\n        \t\"reviews\": 30,\n        \t\"likes\": 105,\n        \t\"id\": 1,\n            \"comments\": [\n                {\n                    \"text\": \"Comment1_Reply_1\",\n                    \"author\": \"Vijendra\",\n                    \"views\": 100,\n                    \"reviews\": 25,\n                    \"likes\": 50,\n                    \"id\": 1\n                }\n            ]\n        },\n        {\n         \"text\": \"Comment2\",\n         \"author\": \"ankur\",\n         \"views\": 100,\n         \"reviews\": 30,\n         \"likes\": 5,\n         \"id\": 2\n       }\n    ]\n}\n ```"
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Create Double Nested Object",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Comment1_Reply_2\",\n    \"author\": \"admin1\",\n    \"views\": 50,\n    \"reviews\": 25,\n    \"likes\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://13.126.6.160:3000/posts/1/comments/1/comments/",
+							"protocol": "http",
+							"host": [
+								"13",
+								"126",
+								"6",
+								"160"
+							],
+							"port": "3000",
+							"path": [
+								"posts",
+								"1",
+								"comments",
+								"1",
+								"comments",
+								""
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "124"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"7c-NcmfzcsZT7zI/yfVbcbBXrqXLQE\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jan 2021 07:54:01 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"Object Created\",\n    \"object\": {\n        \"text\": \"Comment1_Reply_2\",\n        \"author\": \"admin1\",\n        \"views\": 50,\n        \"reviews\": 25,\n        \"likes\": 10,\n        \"id\": 2\n    }\n}"
+				}
+			]
 		},
 		{
 			"name": "Get All data on Path",
@@ -109,43 +335,492 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "167.71.180.1:3000/posts/",
+					"raw": "http://13.126.6.160:3000/posts/",
+					"protocol": "http",
 					"host": [
-						"167",
-						"71",
-						"180",
-						"1"
+						"13",
+						"126",
+						"6",
+						"160"
 					],
 					"port": "3000",
 					"path": [
 						"posts",
 						""
 					]
-				}
+				},
+				"description": "It fetches all data from `store.json` for a given query path at any level\n\n - Complete data  [`http://13.126.6.160:3000/posts/`]\n```json\n[\n    {\n        \"title\": \"Post1\",\n        \"author\": \"Vijendra\",\n        \"views\": 100,\n        \"reviews\": 30,\n        \"likes\": 40,\n        \"id\": 1,\n        \"comments\": [\n            {\n                \"text\": \"Comment1\",\n                \"author\": \"brijesh\",\n                \"views\": 120,\n                \"reviews\": 30,\n                \"likes\": 105,\n                \"id\": 1,\n                \"comments\": [\n                    {\n                        \"text\": \"Comment1_Reply_1\",\n                        \"author\": \"Vijendra\",\n                        \"views\": 100,\n                        \"reviews\": 25,\n                        \"likes\": 50,\n                        \"id\": 1\n                    },\n                    {\n                        \"text\": \"Comment1_Reply_2\",\n                        \"author\": \"admin1\",\n                        \"views\": 50,\n                        \"reviews\": 25,\n                        \"likes\": 10,\n                        \"id\": 2\n                    }\n                ]\n            },\n            {\n                \"text\": \"Comment2\",\n                \"author\": \"ankur\",\n                \"views\": 100,\n                \"reviews\": 30,\n                \"likes\": 5,\n                \"id\": 2\n            },\n            {\n                \"text\": \"Comment3\",\n                \"author\": \"saurabh\",\n                \"views\": 200,\n                \"reviews\": 100,\n                \"likes\": 50,\n                \"id\": 3\n            }\n        ]\n    },\n    {\n        \"title\": \"Post2\",\n        \"author\": \"Admin\",\n        \"views\": 1000,\n        \"reviews\": 300,\n        \"likes\": 550,\n        \"id\": 2\n    }\n]\n```\n***\n - After Delete operation [`http://13.126.6.160:3000/posts/1/comments/3`]\n```json\n[\n    {\n        \"title\": \"Post1\",\n        \"author\": \"Vijendra\",\n        \"views\": 100,\n        \"reviews\": 30,\n        \"likes\": 40,\n        \"id\": 1,\n        \"comments\": [\n            {\n                \"text\": \"Comment1\",\n                \"author\": \"brijesh\",\n                \"views\": 120,\n                \"reviews\": 30,\n                \"likes\": 105,\n                \"id\": 1,\n                \"comments\": [\n                    {\n                        \"text\": \"Comment1_Reply_1\",\n                        \"author\": \"Vijendra\",\n                        \"views\": 100,\n                        \"reviews\": 25,\n                        \"likes\": 50,\n                        \"id\": 1\n                    },\n                    {\n                        \"text\": \"Comment1_Reply_2\",\n                        \"author\": \"admin1\",\n                        \"views\": 50,\n                        \"reviews\": 25,\n                        \"likes\": 10,\n                        \"id\": 2\n                    }\n                ]\n            },\n            {\n                \"text\": \"Comment2\",\n                \"author\": \"ankur\",\n                \"views\": 100,\n                \"reviews\": 30,\n                \"likes\": 5,\n                \"id\": 2\n            }\n        ]\n    },\n    {\n        \"title\": \"Post2\",\n        \"author\": \"Admin\",\n        \"views\": 1000,\n        \"reviews\": 300,\n        \"likes\": 550,\n        \"id\": 2\n    }\n]\n```\n***\n - After Update operation [`http://13.126.6.160:3000/posts/1/comments/1/comments/2`]\n```json\n[\n    {\n        \"title\": \"Post1\",\n        \"author\": \"Vijendra\",\n        \"views\": 100,\n        \"reviews\": 30,\n        \"likes\": 40,\n        \"id\": 1,\n        \"comments\": [\n            {\n                \"text\": \"Comment1\",\n                \"author\": \"brijesh\",\n                \"views\": 120,\n                \"reviews\": 30,\n                \"likes\": 105,\n                \"id\": 1,\n                \"comments\": [\n                    {\n                        \"text\": \"Comment1_Reply_1\",\n                        \"author\": \"Vijendra\",\n                        \"views\": 100,\n                        \"reviews\": 25,\n                        \"likes\": 50,\n                        \"id\": 1\n                    },\n                    {\n                        \"text\": \"Comment1_Reply_2_updated\",\n                        \"author\": \"admin1\",\n                        \"views\": 50,\n                        \"reviews\": 25,\n                        \"likes\": 10,\n                        \"id\": 2\n                    }\n                ]\n            },\n            {\n                \"text\": \"Comment2\",\n                \"author\": \"ankur\",\n                \"views\": 100,\n                \"reviews\": 30,\n                \"likes\": 5,\n                \"id\": 2\n            }\n        ]\n    },\n    {\n        \"title\": \"Post2\",\n        \"author\": \"Admin\",\n        \"views\": 1000,\n        \"reviews\": 300,\n        \"likes\": 550,\n        \"id\": 2\n    }\n]\n```\n***\n - Filter on entity level\n\t- Post level [`http://13.126.6.160:3000/posts?title=Post1&author=Vijendra`]\n\t```json\n\t[\n\t    {\n\t        \"title\": \"Post1\",\n\t        \"author\": \"Vijendra\",\n\t        \"views\": 100,\n\t        \"reviews\": 30,\n\t        \"likes\": 40,\n\t        \"id\": 1,\n\t        \"comments\": [\n\t            {\n\t                \"text\": \"Comment1\",\n\t                \"author\": \"brijesh\",\n\t                \"views\": 120,\n\t                \"reviews\": 30,\n\t                \"likes\": 105,\n\t                \"id\": 1,\n\t                \"comments\": [\n\t                    {\n\t                        \"text\": \"Comment1_Reply_1\",\n\t                        \"author\": \"Vijendra\",\n\t                        \"views\": 100,\n\t                        \"reviews\": 25,\n\t                        \"likes\": 50,\n\t                        \"id\": 1\n\t                    },\n\t                    {\n\t                        \"text\": \"Comment1_Reply_2_updated\",\n\t                        \"author\": \"admin1\",\n\t                        \"views\": 50,\n\t                        \"reviews\": 25,\n\t                        \"likes\": 10,\n\t                        \"id\": 2\n\t                    }\n\t                ]\n\t            },\n\t            {\n\t                \"text\": \"Comment2\",\n\t                \"author\": \"ankur\",\n\t                \"views\": 100,\n\t                \"reviews\": 30,\n\t                \"likes\": 5,\n\t                \"id\": 2\n\t            }\n\t        ]\n\t    }\n\t]\n\t```\n\t- Comment Level [`http://13.126.6.160:3000/posts/1/comments?text=Comment1&author=brijesh`]\n\t```json\n\t[\n\t    {\n\t        \"text\": \"Comment1\",\n\t        \"author\": \"brijesh\",\n\t        \"views\": 120,\n\t        \"reviews\": 30,\n\t        \"likes\": 105,\n\t        \"id\": 1,\n\t        \"comments\": [\n\t            {\n\t                \"text\": \"Comment1_Reply_1\",\n\t                \"author\": \"Vijendra\",\n\t                \"views\": 100,\n\t                \"reviews\": 25,\n\t                \"likes\": 50,\n\t                \"id\": 1\n\t            },\n\t            {\n\t                \"text\": \"Comment1_Reply_2_updated\",\n\t                \"author\": \"admin1\",\n\t                \"views\": 50,\n\t                \"reviews\": 25,\n\t                \"likes\": 10,\n\t                \"id\": 2\n\t            }\n\t        ]\n\t    }\n\t]\n\t```\n***\n - Sorting at entity level\n\t- Without `author` entity only with number of views (asc/desc)\n\t\t- `asc`order of views [`http://13.126.6.160:3000/posts?_sort=views&_order=asc`]\n\t\t```json\n\t\t[\n\t\t    {\n\t\t        \"title\": \"Post1\",\n\t\t        \"author\": \"Vijendra\",\n\t\t        \"views\": 100,\n\t\t        \"reviews\": 30,\n\t\t        \"likes\": 40,\n\t\t        \"id\": 1,\n\t\t        \"comments\": [\n\t\t            {\n\t\t                \"text\": \"Comment1\",\n\t\t                \"author\": \"brijesh\",\n\t\t                \"views\": 120,\n\t\t                \"reviews\": 30,\n\t\t                \"likes\": 105,\n\t\t                \"id\": 1,\n\t\t                \"comments\": [\n\t\t                    {\n\t\t                        \"text\": \"Comment1_Reply_1\",\n\t\t                        \"author\": \"Vijendra\",\n\t\t                        \"views\": 100,\n\t\t                        \"reviews\": 25,\n\t\t                        \"likes\": 50,\n\t\t                        \"id\": 1\n\t\t                    },\n\t\t                    {\n\t\t                        \"text\": \"Comment1_Reply_2_updated\",\n\t\t                        \"author\": \"admin1\",\n\t\t                        \"views\": 50,\n\t\t                        \"reviews\": 25,\n\t\t                        \"likes\": 10,\n\t\t                        \"id\": 2\n\t\t                    }\n\t\t                ]\n\t\t            },\n\t\t            {\n\t\t                \"text\": \"Comment2\",\n\t\t                \"author\": \"ankur\",\n\t\t                \"views\": 100,\n\t\t                \"reviews\": 30,\n\t\t                \"likes\": 5,\n\t\t                \"id\": 2\n\t\t            }\n\t\t        ]\n\t\t    },\n\t\t    {\n\t\t        \"title\": \"Post3\",\n\t\t        \"author\": \"Vijendra\",\n\t\t        \"views\": 500,\n\t\t        \"reviews\": 100,\n\t\t        \"likes\": 51,\n\t\t        \"id\": 3\n\t\t    },\n\t\t    {\n\t\t        \"title\": \"Post2\",\n\t\t        \"author\": \"Admin\",\n\t\t        \"views\": 1000,\n\t\t        \"reviews\": 300,\n\t\t        \"likes\": 550,\n\t\t        \"id\": 2\n\t\t    }\n\t\t]\n\t\t```\n\t- With `author` and `views` [`http://13.126.6.160:3000/posts?_sort=views&_order=asc&author=Vijendra`]\n\t```json\n\t[\n\t    {\n\t        \"title\": \"Post1\",\n\t        \"author\": \"Vijendra\",\n\t        \"views\": 100,\n\t        \"reviews\": 30,\n\t        \"likes\": 40,\n\t        \"id\": 1,\n\t        \"comments\": [\n\t            {\n\t                \"text\": \"Comment1\",\n\t                \"author\": \"brijesh\",\n\t                \"views\": 120,\n\t                \"reviews\": 30,\n\t                \"likes\": 105,\n\t                \"id\": 1,\n\t                \"comments\": [\n\t                    {\n\t                        \"text\": \"Comment1_Reply_1\",\n\t                        \"author\": \"Vijendra\",\n\t                        \"views\": 100,\n\t                        \"reviews\": 25,\n\t                        \"likes\": 50,\n\t                        \"id\": 1\n\t                    },\n\t                    {\n\t                        \"text\": \"Comment1_Reply_2_updated\",\n\t                        \"author\": \"admin1\",\n\t                        \"views\": 50,\n\t                        \"reviews\": 25,\n\t                        \"likes\": 10,\n\t                        \"id\": 2\n\t                    }\n\t                ]\n\t            },\n\t            {\n\t                \"text\": \"Comment2\",\n\t                \"author\": \"ankur\",\n\t                \"views\": 100,\n\t                \"reviews\": 30,\n\t                \"likes\": 5,\n\t                \"id\": 2\n\t            }\n\t        ]\n\t    },\n\t    {\n\t        \"title\": \"Post3\",\n\t        \"author\": \"Vijendra\",\n\t        \"views\": 500,\n\t        \"reviews\": 100,\n\t        \"likes\": 51,\n\t        \"id\": 3\n\t    }\n\t]\n\t```"
 			},
-			"response": []
-		},
-		{
-			"name": "Get Object",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "167.71.180.1:3000/posts/2",
-					"host": [
-						"167",
-						"71",
-						"180",
-						"1"
+			"response": [
+				{
+					"name": "Get All data on Path",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://13.126.6.160:3000/posts",
+							"protocol": "http",
+							"host": [
+								"13",
+								"126",
+								"6",
+								"160"
+							],
+							"port": "3000",
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "538"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"21a-LPlKPp1n+QTJrF2Dg5J5Zm6TUxw\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jan 2021 10:32:01 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
 					],
-					"port": "3000",
-					"path": [
-						"posts",
-						"2"
-					]
+					"cookie": [],
+					"body": "[\n    {\n        \"title\": \"Post1\",\n        \"author\": \"Vijendra\",\n        \"views\": 100,\n        \"reviews\": 30,\n        \"likes\": 40,\n        \"id\": 1,\n        \"comments\": [\n            {\n                \"text\": \"Comment1\",\n                \"author\": \"brijesh\",\n                \"views\": 120,\n                \"reviews\": 30,\n                \"likes\": 105,\n                \"id\": 1,\n                \"comments\": [\n                    {\n                        \"text\": \"Comment1_Reply_1\",\n                        \"author\": \"Vijendra\",\n                        \"views\": 100,\n                        \"reviews\": 25,\n                        \"likes\": 50,\n                        \"id\": 1\n                    },\n                    {\n                        \"text\": \"Comment1_Reply_2_updated\",\n                        \"author\": \"admin1\",\n                        \"views\": 50,\n                        \"reviews\": 25,\n                        \"likes\": 10,\n                        \"id\": 2\n                    }\n                ]\n            },\n            {\n                \"text\": \"Comment2\",\n                \"author\": \"ankur\",\n                \"views\": 100,\n                \"reviews\": 30,\n                \"likes\": 5,\n                \"id\": 2\n            }\n        ]\n    },\n    {\n        \"title\": \"Post2\",\n        \"author\": \"Admin\",\n        \"views\": 1000,\n        \"reviews\": 300,\n        \"likes\": 550,\n        \"id\": 2\n    }\n]"
+				},
+				{
+					"name": "Get All data on Path",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://13.126.6.160:3000/posts?_sort=views&_order=asc&author=Vijendra",
+							"protocol": "http",
+							"host": [
+								"13",
+								"126",
+								"6",
+								"160"
+							],
+							"port": "3000",
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "_sort",
+									"value": "views"
+								},
+								{
+									"key": "_order",
+									"value": "asc"
+								},
+								{
+									"key": "author",
+									"value": "Vijendra"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "539"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"21b-o+zLj187yGDS5tXBktThfDSAQ4c\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jan 2021 10:56:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"title\": \"Post1\",\n        \"author\": \"Vijendra\",\n        \"views\": 100,\n        \"reviews\": 30,\n        \"likes\": 40,\n        \"id\": 1,\n        \"comments\": [\n            {\n                \"text\": \"Comment1\",\n                \"author\": \"brijesh\",\n                \"views\": 120,\n                \"reviews\": 30,\n                \"likes\": 105,\n                \"id\": 1,\n                \"comments\": [\n                    {\n                        \"text\": \"Comment1_Reply_1\",\n                        \"author\": \"Vijendra\",\n                        \"views\": 100,\n                        \"reviews\": 25,\n                        \"likes\": 50,\n                        \"id\": 1\n                    },\n                    {\n                        \"text\": \"Comment1_Reply_2_updated\",\n                        \"author\": \"admin1\",\n                        \"views\": 50,\n                        \"reviews\": 25,\n                        \"likes\": 10,\n                        \"id\": 2\n                    }\n                ]\n            },\n            {\n                \"text\": \"Comment2\",\n                \"author\": \"ankur\",\n                \"views\": 100,\n                \"reviews\": 30,\n                \"likes\": 5,\n                \"id\": 2\n            }\n        ]\n    },\n    {\n        \"title\": \"Post3\",\n        \"author\": \"Vijendra\",\n        \"views\": 500,\n        \"reviews\": 100,\n        \"likes\": 51,\n        \"id\": 3\n    }\n]"
+				},
+				{
+					"name": "Get All data on Path",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://13.126.6.160:3000/posts?title=Post1&author=Vijendra",
+							"protocol": "http",
+							"host": [
+								"13",
+								"126",
+								"6",
+								"160"
+							],
+							"port": "3000",
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "Post1"
+								},
+								{
+									"key": "author",
+									"value": "Vijendra"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "457"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1c9-f0TmGY63lRtxyIFR241/McfyiPc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jan 2021 10:38:46 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"title\": \"Post1\",\n        \"author\": \"Vijendra\",\n        \"views\": 100,\n        \"reviews\": 30,\n        \"likes\": 40,\n        \"id\": 1,\n        \"comments\": [\n            {\n                \"text\": \"Comment1\",\n                \"author\": \"brijesh\",\n                \"views\": 120,\n                \"reviews\": 30,\n                \"likes\": 105,\n                \"id\": 1,\n                \"comments\": [\n                    {\n                        \"text\": \"Comment1_Reply_1\",\n                        \"author\": \"Vijendra\",\n                        \"views\": 100,\n                        \"reviews\": 25,\n                        \"likes\": 50,\n                        \"id\": 1\n                    },\n                    {\n                        \"text\": \"Comment1_Reply_2_updated\",\n                        \"author\": \"admin1\",\n                        \"views\": 50,\n                        \"reviews\": 25,\n                        \"likes\": 10,\n                        \"id\": 2\n                    }\n                ]\n            },\n            {\n                \"text\": \"Comment2\",\n                \"author\": \"ankur\",\n                \"views\": 100,\n                \"reviews\": 30,\n                \"likes\": 5,\n                \"id\": 2\n            }\n        ]\n    }\n]"
+				},
+				{
+					"name": "Get All data on Path",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://13.126.6.160:3000/posts/",
+							"protocol": "http",
+							"host": [
+								"13",
+								"126",
+								"6",
+								"160"
+							],
+							"port": "3000",
+							"path": [
+								"posts",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "530"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"212-7FULHlvaeWz9YRxHWIS5x6YgfG0\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jan 2021 09:24:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"title\": \"Post1\",\n        \"author\": \"Vijendra\",\n        \"views\": 100,\n        \"reviews\": 30,\n        \"likes\": 40,\n        \"id\": 1,\n        \"comments\": [\n            {\n                \"text\": \"Comment1\",\n                \"author\": \"brijesh\",\n                \"views\": 120,\n                \"reviews\": 30,\n                \"likes\": 105,\n                \"id\": 1,\n                \"comments\": [\n                    {\n                        \"text\": \"Comment1_Reply_1\",\n                        \"author\": \"Vijendra\",\n                        \"views\": 100,\n                        \"reviews\": 25,\n                        \"likes\": 50,\n                        \"id\": 1\n                    },\n                    {\n                        \"text\": \"Comment1_Reply_2\",\n                        \"author\": \"admin1\",\n                        \"views\": 50,\n                        \"reviews\": 25,\n                        \"likes\": 10,\n                        \"id\": 2\n                    }\n                ]\n            },\n            {\n                \"text\": \"Comment2\",\n                \"author\": \"ankur\",\n                \"views\": 100,\n                \"reviews\": 30,\n                \"likes\": 5,\n                \"id\": 2\n            }\n        ]\n    },\n    {\n        \"title\": \"Post2\",\n        \"author\": \"Admin\",\n        \"views\": 1000,\n        \"reviews\": 300,\n        \"likes\": 550,\n        \"id\": 2\n    }\n]"
+				},
+				{
+					"name": "Get All data on Path",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://13.126.6.160:3000/posts?_sort=views&_order=asc",
+							"protocol": "http",
+							"host": [
+								"13",
+								"126",
+								"6",
+								"160"
+							],
+							"port": "3000",
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "_sort",
+									"value": "views"
+								},
+								{
+									"key": "_order",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "620"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"26c-QXd8uOtZl0hVR38yNizWlslzQrQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jan 2021 10:56:32 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"title\": \"Post1\",\n        \"author\": \"Vijendra\",\n        \"views\": 100,\n        \"reviews\": 30,\n        \"likes\": 40,\n        \"id\": 1,\n        \"comments\": [\n            {\n                \"text\": \"Comment1\",\n                \"author\": \"brijesh\",\n                \"views\": 120,\n                \"reviews\": 30,\n                \"likes\": 105,\n                \"id\": 1,\n                \"comments\": [\n                    {\n                        \"text\": \"Comment1_Reply_1\",\n                        \"author\": \"Vijendra\",\n                        \"views\": 100,\n                        \"reviews\": 25,\n                        \"likes\": 50,\n                        \"id\": 1\n                    },\n                    {\n                        \"text\": \"Comment1_Reply_2_updated\",\n                        \"author\": \"admin1\",\n                        \"views\": 50,\n                        \"reviews\": 25,\n                        \"likes\": 10,\n                        \"id\": 2\n                    }\n                ]\n            },\n            {\n                \"text\": \"Comment2\",\n                \"author\": \"ankur\",\n                \"views\": 100,\n                \"reviews\": 30,\n                \"likes\": 5,\n                \"id\": 2\n            }\n        ]\n    },\n    {\n        \"title\": \"Post3\",\n        \"author\": \"Vijendra\",\n        \"views\": 500,\n        \"reviews\": 100,\n        \"likes\": 51,\n        \"id\": 3\n    },\n    {\n        \"title\": \"Post2\",\n        \"author\": \"Admin\",\n        \"views\": 1000,\n        \"reviews\": 300,\n        \"likes\": 550,\n        \"id\": 2\n    }\n]"
+				},
+				{
+					"name": "Get All data on Path",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://13.126.6.160:3000/posts/",
+							"protocol": "http",
+							"host": [
+								"13",
+								"126",
+								"6",
+								"160"
+							],
+							"port": "3000",
+							"path": [
+								"posts",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "613"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"265-qdFCpCMLRglOry5ykXsjty3vGNM\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jan 2021 09:22:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"title\": \"Post1\",\n        \"author\": \"Vijendra\",\n        \"views\": 100,\n        \"reviews\": 30,\n        \"likes\": 40,\n        \"id\": 1,\n        \"comments\": [\n            {\n                \"text\": \"Comment1\",\n                \"author\": \"brijesh\",\n                \"views\": 120,\n                \"reviews\": 30,\n                \"likes\": 105,\n                \"id\": 1,\n                \"comments\": [\n                    {\n                        \"text\": \"Comment1_Reply_1\",\n                        \"author\": \"Vijendra\",\n                        \"views\": 100,\n                        \"reviews\": 25,\n                        \"likes\": 50,\n                        \"id\": 1\n                    },\n                    {\n                        \"text\": \"Comment1_Reply_2\",\n                        \"author\": \"admin1\",\n                        \"views\": 50,\n                        \"reviews\": 25,\n                        \"likes\": 10,\n                        \"id\": 2\n                    }\n                ]\n            },\n            {\n                \"text\": \"Comment2\",\n                \"author\": \"ankur\",\n                \"views\": 100,\n                \"reviews\": 30,\n                \"likes\": 5,\n                \"id\": 2\n            },\n            {\n                \"text\": \"Comment3\",\n                \"author\": \"saurabh\",\n                \"views\": 200,\n                \"reviews\": 100,\n                \"likes\": 50,\n                \"id\": 3\n            }\n        ]\n    },\n    {\n        \"title\": \"Post2\",\n        \"author\": \"Admin\",\n        \"views\": 1000,\n        \"reviews\": 300,\n        \"likes\": 550,\n        \"id\": 2\n    }\n]"
+				},
+				{
+					"name": "Get All data on Path",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://13.126.6.160:3000/posts/1/comments?text=Comment1&author=brijesh",
+							"protocol": "http",
+							"host": [
+								"13",
+								"126",
+								"6",
+								"160"
+							],
+							"port": "3000",
+							"path": [
+								"posts",
+								"1",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "Comment1"
+								},
+								{
+									"key": "author",
+									"value": "brijesh"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "284"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"11c-wci+Kyy71tDQ4/d3RW4IOMg6lJA\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jan 2021 10:41:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"text\": \"Comment1\",\n        \"author\": \"brijesh\",\n        \"views\": 120,\n        \"reviews\": 30,\n        \"likes\": 105,\n        \"id\": 1,\n        \"comments\": [\n            {\n                \"text\": \"Comment1_Reply_1\",\n                \"author\": \"Vijendra\",\n                \"views\": 100,\n                \"reviews\": 25,\n                \"likes\": 50,\n                \"id\": 1\n            },\n            {\n                \"text\": \"Comment1_Reply_2_updated\",\n                \"author\": \"admin1\",\n                \"views\": 50,\n                \"reviews\": 25,\n                \"likes\": 10,\n                \"id\": 2\n            }\n        ]\n    }\n]"
 				}
-			},
-			"response": []
+			]
 		},
 		{
 			"name": "Delete Object",
@@ -153,21 +828,89 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "167.71.180.1:3000/posts/3",
+					"raw": "http://13.126.6.160:3000/posts/1/comments/3",
+					"protocol": "http",
 					"host": [
-						"167",
-						"71",
-						"180",
-						"1"
+						"13",
+						"126",
+						"6",
+						"160"
 					],
 					"port": "3000",
 					"path": [
 						"posts",
+						"1",
+						"comments",
 						"3"
 					]
-				}
+				},
+				"description": "To delete any Object at any level\n```json\n{\n    \"status\": \"Object deleted successfully\",\n    \"object\": {\n        \"text\": \"Comment3\",\n        \"author\": \"saurabh\",\n        \"views\": 200,\n        \"reviews\": 100,\n        \"likes\": 50,\n        \"id\": 3\n    }\n}\n```"
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Delete Object",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://13.126.6.160:3000/posts/1/comments/3",
+							"protocol": "http",
+							"host": [
+								"13",
+								"126",
+								"6",
+								"160"
+							],
+							"port": "3000",
+							"path": [
+								"posts",
+								"1",
+								"comments",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "132"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"84-q7Dm1L3OWjwFaAiS0oUI1xAwRXA\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jan 2021 09:22:59 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"Object deleted successfully\",\n    \"object\": {\n        \"text\": \"Comment3\",\n        \"author\": \"saurabh\",\n        \"views\": 200,\n        \"reviews\": 100,\n        \"likes\": 50,\n        \"id\": 3\n    }\n}"
+				}
+			]
 		},
 		{
 			"name": "Update Object",
@@ -176,7 +919,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\":3,\r\n    \"title\":\"Post 3\",\r\n    \"author\":\"vijendra\",\r\n    \"college\":\"IIITS\"\r\n\r\n}",
+					"raw": "{\n    \"text\": \"Comment1_Reply_2_updated\",\n    \"author\": \"admin1\",\n    \"views\": 50,\n    \"reviews\": 25,\n    \"likes\": 10\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -184,21 +927,103 @@
 					}
 				},
 				"url": {
-					"raw": "167.71.180.1:3000/posts/3",
+					"raw": "http://13.126.6.160:3000/posts/1/comments/1/comments/2",
+					"protocol": "http",
 					"host": [
-						"167",
-						"71",
-						"180",
-						"1"
+						"13",
+						"126",
+						"6",
+						"160"
 					],
 					"port": "3000",
 					"path": [
 						"posts",
-						"3"
+						"1",
+						"comments",
+						"1",
+						"comments",
+						"2"
 					]
-				}
+				},
+				"description": "It updates any object at any level based on given query path [`http://13.126.6.160:3000/posts/1/comments/1/comments/2`] \n - Updating `second comment (reply)` of first comment for 1st Post \n\n```json\n{\n    \"text\": \"Comment1\",\n    \"author\": \"brijesh\",\n    \"views\": 120,\n    \"reviews\": 30,\n    \"likes\": 105,\n    \"id\": 1,\n    \"comments\": [\n        {\n            \"text\": \"Comment1_Reply_1\",\n            \"author\": \"Vijendra\",\n            \"views\": 100,\n            \"reviews\": 25,\n            \"likes\": 50,\n            \"id\": 1\n        },\n        {\n            \"text\": \"Comment1_Reply_2_updated\",\n            \"author\": \"admin1\",\n            \"views\": 50,\n            \"reviews\": 25,\n            \"likes\": 10,\n            \"id\": 2\n        }\n    ]\n}\n```"
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Update Object",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Comment1_Reply_2_updated\",\n    \"author\": \"admin1\",\n    \"views\": 50,\n    \"reviews\": 25,\n    \"likes\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://13.126.6.160:3000/posts/1/comments/1/comments/2",
+							"protocol": "http",
+							"host": [
+								"13",
+								"126",
+								"6",
+								"160"
+							],
+							"port": "3000",
+							"path": [
+								"posts",
+								"1",
+								"comments",
+								"1",
+								"comments",
+								"2"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "132"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"84-ku3JH3thjyXRDXAdIYKXFSJvQXE\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jan 2021 10:30:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"Object Created\",\n    \"object\": {\n        \"text\": \"Comment1_Reply_2_updated\",\n        \"author\": \"admin1\",\n        \"views\": 50,\n        \"reviews\": 25,\n        \"likes\": 10,\n        \"id\": 2\n    }\n}"
+				}
+			]
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
