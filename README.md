@@ -80,7 +80,10 @@ Implemented all the below **features** according to `problem statement` and code
 
 - **APIs base url**: `http://13.126.6.160:3000/`
 - **Postman Collection** to Explore all APIs - https://github.com/rajvijen/jsonapi/blob/master/postman_collection.json
+  - [This `Postman-Collection` can be imported in Postman]
 - **Postman API Documentation**: https://documenter.getpostman.com/view/8005036/TVt2c4BR
+  - From here APIs can be opened by clicking on right corner button - `Run in Postman` as follows
+    [![Image from Gyazo](https://i.gyazo.com/8bc7838bfa5c1b6e9dea0da25f0b774d.png)](https://gyazo.com/8bc7838bfa5c1b6e9dea0da25f0b774d)
 
 ### Data Store:-
 
