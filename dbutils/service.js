@@ -163,17 +163,42 @@ exports.filterByQueryParams = async (data, params) => {
   return _.where(data, params);
 };
 
+exports.sortByQueryParams = async (data, sortby, orderby) => {
+  if (!orderby){
+    orderby = 'asc'
+  }
+
+  if (!data || data.constructor != Array || !sortby) {
+   return data
+  }
+
+  data = _.sortBy(data, sortby)
+  if (orderby== 'dsc' || orderby == 'desc') {
+    data = data.reverse()
+  }
+
+  return data
+}
+
 // Sorting -> use _
 
 exports.getFullCategory = async (subpaths, params = {}) => {
   const allData = await this.readDB();
   const subDocument = await this.getSubDocumentAtPath(allData, subpaths);
 
+  sortby = params['_sort']
+  orderby = params['_order']
+  delete params['_sort']
+  delete params['_order']
+
   retData = await this.filterByQueryParams(subDocument, params);
   // use params dict
-
+  // console.log(retData)
+  retData = await this.sortByQueryParams(retData, sortby, orderby)
   // call to sort method
+  // console.log(retData)
   return retData;
+
 };
 
 exports.deleteObject = async (subpaths) => {
