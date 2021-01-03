@@ -27,7 +27,7 @@
 
 - Enable sorting at entity level :
 
-  - `GET /posts?\_sort=views&\_order=asc`
+  - `GET /posts?_sort=views&_order=asc`
 
 - Enable basic search at entity level:
 
@@ -47,12 +47,12 @@ Implemented all the below **features** according to `problem statement` and code
 
 ### Features:-
 
-- [ ] Every data set should have a parent identifier (entity type), which will be used in the GET APIs.
-- [ ] Every data set should have an ID (Primary key)
-- [ ] ID should be immutable, error needs to be thrown if ID is tried to be mutated.
-- [ ] If you make POST, PUT, PATCH or DELETE requests, changes have to be automatically saved to store.json.
-- [ ] The store.json file should support multiple entity types.
-- [ ] Sample APIs to be supported by the mock server on store.json file:
+- [x] Every data set should have a parent identifier (entity type), which will be used in the GET APIs.
+- [x] Every data set should have an ID (Primary key)
+- [x] ID should be immutable, error needs to be thrown if ID is tried to be mutated.
+- [x] If you make POST, PUT, PATCH or DELETE requests, changes have to be automatically saved to store.json.
+- [x] The store.json file should support multiple entity types.
+- [x] Sample APIs to be supported by the mock server on store.json file:
   ```md
   GET /posts
   GET /posts/0
@@ -61,20 +61,20 @@ Implemented all the below **features** according to `problem statement` and code
   PATCH /posts/1
   DELETE /posts/1
   ```
-- [ ] Enable filtering at entity level :
+- [x] Enable filtering at entity level :
 
   - `GET /posts?title=title1&author=CIQ`
 
-- [ ] Enable sorting at entity level :
+- [x] Enable sorting at entity level :
 
   - `GET /posts?_sort=views&_order=asc`
 
-- [ ] Enable basic search at entity level:
+- [x] Enable basic search at entity level:
 
   - `GET /posts?q=IQ`
 
-- [ ] Support for `nested structures` will yield a `bonus point`.
-- [ ] Treat store.json as an empty slate where you can add and retrieve any data.
+- [x] Support for `nested structures` will yield a `bonus point`.
+- [x] Treat store.json as an empty slate where you can add and retrieve any data.
 
 ### API Documentation:-
 
@@ -134,4 +134,4 @@ Implemented all the below **features** according to `problem statement` and code
 ### Special Features Implemented:-
 
 - Infinite Nesting (Level of Threading can be go upto any level, something like `reddit discussion threads`)
-- Used `async-mutex` for `thread safety` so that `POST` requests never gets overlapped in asynchronous calls.
+- Used `Mutex locks` for simultaneous writes
